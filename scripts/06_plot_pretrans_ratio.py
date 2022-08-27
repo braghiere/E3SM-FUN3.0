@@ -29,7 +29,7 @@ plt.rcParams["font.family"] = "sans-serif"  # # font
 
 
 #f = Dataset('files/time_average_h0.nc','r')
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]
@@ -93,8 +93,8 @@ pactive[pactive<np.max(pactive)/100.]=0.0
 
 v = np.zeros((96,144))
 
-for i in xrange(144):
-  for j in xrange(96):
+for i in range(144):
+  for j in range(96):
     if (leafp_to_litter[j,i] != 0.0):
       v[j,i] = 100.*(pactive[j,i]/leafp_to_litter[j,i])
     else:
@@ -128,7 +128,8 @@ mdata = maskoceans(x2, y2, data2,resolution='l',grid=1.25,inlands=True)
 
 #My colorbar
 
-upper = plt.cm.jet(np.arange(256))
+#upper = plt.cm.jet(np.arange(256))
+upper = plt.cm.viridis(np.arange(256))
 
 lower = np.ones((int(256/4),4))
 
@@ -141,6 +142,7 @@ cmap = ListedColormap(cmap, name='myColorMap', N=cmap.shape[0])
 
 
 max_val = np.max(v)
+max_val = 45.
 print(max_val)
 #sys.exit()
 
@@ -148,15 +150,15 @@ print(max_val)
 levels=[-0.0051251*max_val,0.,0.0051251*max_val,0.01251*max_val,0.0625*max_val,.1*max_val,.2*max_val,.3*max_val,.4*max_val,.5*max_val,.6*max_val,.7*max_val,.75*max_val,.8*max_val,.9*max_val,1.*max_val]
 
 
-for i in xrange(1):
+for i in range(1):
    fig = plt.figure(figsize=(48, 48)) 
    m.drawmapboundary(fill_color='white', zorder=-1, linewidth=4.5)
    m.fillcontinents(color='0.8', lake_color='white', zorder=0)
  
    m.drawcoastlines(color='0.0', linewidth=4.5)
    #m.drawcountries(color='0.', linewidth=4.5)
-   m.drawparallels(np.arange(-90.,91.,30.), labels=[1,0,0,1],    dashes=[1,1], linewidth=1.0, color='0.5',fontsize='x-large')
-   m.drawmeridians(np.arange(0., 360., 60.), labels=[1,0,0,1], dashes=[1,1], linewidth=1.0, color='0.5',fontsize='x-large')
+   m.drawparallels(np.arange(-90.,91.,30.), labels=[1,0,0,1],    dashes=[1,1], linewidth=1.0, color='0.5',fontsize='xx-large')
+   m.drawmeridians(np.arange(0., 360., 60.), labels=[1,0,0,1], dashes=[1,1], linewidth=1.0, color='0.5',fontsize='xx-large')
 
 
    #mdata[mdata==np.nan]=10e-20
@@ -180,7 +182,7 @@ for i in xrange(1):
    cbar.ax.get_xaxis().labelpad = 45
    #cbar.ax.set_ylabel('EM (%)', rotation=270)
    #cbar.ax.set_xlabel('g P m$^{-2}$ yr$^{-1}$', rotation=0,color='black', size=78, fontname='Times')
-   cbar.ax.set_xlabel('%', rotation=0,color='black', size=78)
+   cbar.ax.set_xlabel('Retranslocation ratio (%)', rotation=0,color='black', size=78*1.5)
    #cbar.ax.set_xlabel('ECM tree basal area (%)', rotation=0,color='black', size=78)
    #no coloredge
    #cbar.solids.set_edgecolor("face")
@@ -189,7 +191,7 @@ for i in xrange(1):
    #cbar.set_clim(0.0,100)
    cbar.set_clim(vmin,vmax)
    #plt.title(r'Retranslocation', fontname='Times', fontsize=92,pad=26)
-   cbar.ax.tick_params(labelsize='xx-large')
+   cbar.ax.tick_params(labelsize=92)
    #plt.savefig('em_steindinger_tot.pdf',bbox_inches="tight",dpi=300)
    plt.savefig('figures/PRETRANS_ratio.png',bbox_inches="tight")
    #plt.savefig('ecm_orig_shi_1p9x2p5.png',bbox_inches="tight",dpi=300)

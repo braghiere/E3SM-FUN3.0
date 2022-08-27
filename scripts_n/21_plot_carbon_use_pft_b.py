@@ -84,7 +84,7 @@ pftname_fig = [ "not \n vegetated",
 
 
 #f = Dataset('files/time_average_elm_pft.nc','r')
-f = Dataset('files/fix_global_v7_funp_pft_year.nc','r')
+f = Dataset('files/fix_global_v6_funp_pft_year.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]

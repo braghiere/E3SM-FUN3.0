@@ -84,7 +84,7 @@ pftname_fig = [ "not \n vegetated",
 
 
 #f = Dataset('files/time_average_elm_pft.nc','r')
-f = Dataset('files/fix_global_v7_funp_pft_year.nc','r')
+f = Dataset('files/fix_global_v6_funp_pft_year.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]
@@ -121,9 +121,9 @@ pnonmyc_ori = pnonmyc_ori/cost_nonmyc_ori
 pactive_ori = pactive_ori/cost_active_ori
 pretrans_ori = pretrans_ori/cost_retrans_ori
 
-pnonmyc_ori = f.variables['NPP_PNONMYC'][:]
-pactive_ori = f.variables['NPP_PACTIVE'][:]
-pretrans_ori = f.variables['NPP_PRETRANS'][:]
+#pnonmyc_ori = f.variables['NNONMYC'][:]/f.variables['COST_NNONMYC'][:]
+#pactive_ori = f.variables['NACTIVE'][:]/f.variables['COST_NACTIVE'][:]
+#pretrans_ori = f.variables['NRETRANS'][:]/f.variables['COST_NRETRANS'][:]
 
 
 pnonmyc_ori,lon = shiftgrid(180., pnonmyc_ori, lon, start=False)
@@ -135,19 +135,19 @@ pretrans_ori,lon = shiftgrid(180., pretrans_ori, lon, start=False)
 
 
 pactive_ori[pactive_ori >= 1.e+2]=0.
-#pactive_ori[pactive_ori == 1]=0.
+pactive_ori[pactive_ori == 1]=0.
 #pactive_ori[pactive_ori == 0]=np.nan
 
 pnonmyc_ori[pnonmyc_ori >= 1.e+2]=0.
-#pnonmyc_ori[pnonmyc_ori == 1]=0.
+pnonmyc_ori[pnonmyc_ori == 1]=0.
 #pnonmyc_ori[pnonmyc_ori == 0]=np.nan
 
 pretrans_ori[pretrans_ori >= 1.e+2]=0.
-#pretrans_ori[pretrans_ori == 1]=0.
+pretrans_ori[pretrans_ori == 1]=0.
 #pretrans_ori[pretrans_ori == 0]=np.nan
 
 
-#for i in xrange(16):
+#for i in range(16):
 #   plt.imshow(pnonmyc_ori[i,:,:])
 #   plt.show()
 #sys.exit()
@@ -175,7 +175,7 @@ npp_pactive_tot = []
 npp_pnonmyc_tot = [] 
 npp_pretrans_tot = [] 
 
-for i in xrange(len(pft)):
+for i in range(len(pft)):
 
    print('pft=',pft[i])
    #PACTIVE
@@ -279,7 +279,7 @@ pretrans= np.array(pretrans_ori[:,:,:]*const)
 #pretrans[pretrans==1]=np.nan
 pretrans=np.ma.masked_array(pretrans,np.isnan(pretrans))
 
-#for i in xrange(16):
+#for i in range(16):
 #   plt.imshow(pactive[i,:,:])
 #   plt.show()
 #sys.exit()
@@ -341,12 +341,12 @@ print(np.shape(pactive_mean))
 
 fig = plt.figure(figsize=(48, 24))
 
-p1 = plt.bar(ind, np.array(pactive_mean), width, color = 'b',edgecolor='k',linewidth=3.3)
+p1 = plt.bar(ind, np.array(pactive_mean), width, color = '#edf8b1',edgecolor='k',linewidth=3.3)
 
-p2 = plt.bar(ind, np.array(pnonmyc_mean), width, color = 'r',edgecolor='k',linewidth=3.3, bottom=np.array(pactive_mean))
+p2 = plt.bar(ind, np.array(pnonmyc_mean), width, color = '#7fcdbb',edgecolor='k',linewidth=3.3, bottom=np.array(pactive_mean))
 
 
-p3 = plt.bar(ind, np.array(pretrans_mean), width,color = 'darkorange',edgecolor='k',linewidth=3.3,bottom=np.array(pactive_mean)+np.array(pnonmyc_mean))
+p3 = plt.bar(ind, np.array(pretrans_mean), width,color = '#2c7fb8',edgecolor='k',linewidth=3.3,bottom=np.array(pactive_mean)+np.array(pnonmyc_mean))
 
 
 
@@ -360,7 +360,7 @@ plt.savefig('figures/10_test.png')
 plt.close()
 #sys.exit()
 
-for i in xrange(len(pft)):
+for i in range(len(pft)):
 
  #PNONMYC
  pnonmyc_arr.append(np.mean(np.ma.average(pnonmyc[i,:,:], \
@@ -513,12 +513,12 @@ fig = plt.figure(figsize=(48, 24))
 
 const = 365*24*60*60
 
-p1 = plt.bar(ind, np.array(pactive_arr_glob), width, color = 'b',edgecolor='k',linewidth=3.3)
+p1 = plt.bar(ind, np.array(pactive_arr_glob), width, color = '#edf8b1',edgecolor='k',linewidth=3.3)
 
-p2 = plt.bar(ind, np.array(pnonmyc_arr_glob), width, color = 'r',edgecolor='k',linewidth=3.3, bottom=np.array(pactive_arr_glob))
+p2 = plt.bar(ind, np.array(pnonmyc_arr_glob), width, color = '#7fcdbb',edgecolor='k',linewidth=3.3, bottom=np.array(pactive_arr_glob))
 
 
-p3 = plt.bar(ind, np.array(pretrans_arr_glob), width,color = 'darkorange',edgecolor='k',linewidth=3.3,yerr=ptotal_std_glob, error_kw=dict(lw=5, capsize =5, capthick=3), bottom=np.array(pactive_arr_glob)+np.array(pnonmyc_arr_glob))
+p3 = plt.bar(ind, np.array(pretrans_arr_glob), width,color = '#2c7fb8',edgecolor='k',linewidth=3.3,yerr=ptotal_std_glob, error_kw=dict(lw=5, capsize =5, capthick=3), bottom=np.array(pactive_arr_glob)+np.array(pnonmyc_arr_glob))
 
 
 

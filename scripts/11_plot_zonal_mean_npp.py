@@ -42,7 +42,7 @@ def mean_confidence_interval(data, confidence=0.95):
 #f = Dataset('files/time_average_h0.nc','r')
 #f1 = Dataset('files/E3SM_latest_time_average_1994_2005.nc','r')
 
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
 f1 = Dataset('../fix_global_v3_1994_2005/files/fix_global_v3_time_avg.nc','r')
 
 lon1 = f1.variables['lon'][:]
@@ -214,7 +214,7 @@ gpp_mte_ori_mean_pretrans = []
 gpp_mte_ori_ci34_0 = []
 gpp_mte_ori_ci34_1 = []
 
-for i in xrange(1):
+for i in range(1):
 
       #print np.shape(npp[i])
       #gpp_mte_ori_mean.append(np.mean(npp[i],axis = 1))
@@ -239,7 +239,7 @@ for i, pft in enumerate(my_pfts):
         
         #From gCm-2s-1 to TgCyr-1
         const = (365*24*60*60)
-        plt.stackplot(np.floor(((np.asarray(x) + 1)*res_lat) -90.),np.array(gpp_mte_ori_mean_pnonmyc[0][:])*(const),np.array(gpp_mte_ori_mean_npp_elm[0][:])*(const)-np.array(gpp_mte_ori_mean_pnonmyc[0][:])*(const),edgecolor='k',linewidth=3.3,colors=['darkorange','b'],labels=['ELMv1-FUN3.0','ELMv1']) 
+        plt.stackplot(np.floor(((np.asarray(x) + 1)*res_lat) -90.),np.array(gpp_mte_ori_mean_pnonmyc[0][:])*(const),np.array(gpp_mte_ori_mean_npp_elm[0][:])*(const)-np.array(gpp_mte_ori_mean_pnonmyc[0][:])*(const),edgecolor='k',linewidth=3.3,colors=['#7fcdbb','#2c7fb8'],labels=['ELMv1-FUN3.0','ELMv1']) 
 
 
 

@@ -128,7 +128,7 @@ mdata = maskoceans(x2, y2, data2,resolution='l',grid=1.25,inlands=True)
 
 #My colorbar
 
-upper = plt.cm.jet(np.arange(256))
+upper = plt.cm.viridis(np.arange(256))
 
 lower = np.ones((int(256/4),4))
 

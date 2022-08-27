@@ -29,7 +29,7 @@ plt.rcParams["font.family"] = "sans-serif"  # # font
 
 
 #f = Dataset('files/time_average_h0.nc','r')
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
 f1 = Dataset('../fix_global_v3_1994_2005/files/fix_global_v3_time_avg.nc','r')
 
 lat = f.variables['lat'][:]
@@ -105,7 +105,7 @@ levels=[-1.*max_val,-0.8*max_val,-0.6*max_val,-0.4*max_val,-.2*max_val,-.1*max_v
 
 print(levels)
 
-for i in xrange(1):
+for i in range(1):
    fig = plt.figure(figsize=(48, 48)) 
    m.drawmapboundary(fill_color='white', zorder=-1, linewidth=4.5)
    m.fillcontinents(color='0.8', lake_color='white', zorder=0)
@@ -223,7 +223,7 @@ levels=[-1.*max_val,-0.75*max_val,-0.65*max_val,-0.55*max_val,-0.45*max_val,-.35
 
 print(levels)
 
-for i in xrange(1):
+for i in range(1):
    fig = plt.figure(figsize=(48, 48)) 
    m.drawmapboundary(fill_color='white', zorder=-1, linewidth=4.5)
    m.fillcontinents(color='0.8', lake_color='white', zorder=0)

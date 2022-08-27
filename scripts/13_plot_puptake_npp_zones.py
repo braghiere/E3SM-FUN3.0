@@ -42,7 +42,7 @@ def mean_confidence_interval(data, confidence=0.95):
 #f = Dataset('files/time_average_h0.nc','r')
 #f1 = Dataset('files/E3SM_latest_time_average_1994_2005.nc','r')
 
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
 f1 = Dataset('../fix_global_v3_1994_2005/files/fix_global_v3_time_avg.nc','r')
 
 lon1 = f1.variables['lon'][:]
@@ -355,15 +355,15 @@ ind = np.arange(2)
 width = 0.75
 
 fig = plt.figure(figsize=(48, 24))
-p1 = plt.bar(ind, 100.*np.array(nuptake_frac), width, color = 'b',edgecolor='k',linewidth=3.3,yerr=100.*np.array(nuptake_frac_std), error_kw=dict(lw=5, capsize =5, capthick=3),alpha=0.65)
-p2 = plt.bar(ind, 100.*np.array(puptake_frac), width,color = 'darkorange',edgecolor='k',linewidth=3.3, bottom=100.*np.array(nuptake_frac),yerr=100.*np.array(puptake_frac_std), error_kw=dict(lw=5, capsize =5, capthick=3),alpha=0.65)
+p1 = plt.bar(ind, 100.*np.array(nuptake_frac), width, color = '#7fcdbb',edgecolor='k',linewidth=3.3,yerr=100.*np.array(nuptake_frac_std), error_kw=dict(lw=5, capsize =5, capthick=3),alpha=0.65)
+p2 = plt.bar(ind, 100.*np.array(puptake_frac), width,color = '#2c7fb8',edgecolor='k',linewidth=3.3, bottom=100.*np.array(nuptake_frac),yerr=100.*np.array(puptake_frac_std), error_kw=dict(lw=5, capsize =5, capthick=3),alpha=0.65)
 plt.ylabel('Percent (%) NPP \n allocated to N and P acquistion ')
 plt.xticks(ind,('Tropical','Temperate'))
 plt.legend((p1[0],p2[0]),(r'N acquisition','P acquisition'))
 #($\div$ 100)
 plt.ticklabel_format(axis="y",style="sci",scilimits=(0,0))
 plt.savefig('figures/PERCENT_NPP.png',bbox_inches="tight")
-plt.show()
+#plt.show()
 sys.exit()
 
 
@@ -379,7 +379,7 @@ gpp_mte_ori_mean_pretrans = []
 gpp_mte_ori_ci34_0 = []
 gpp_mte_ori_ci34_1 = []
 
-for i in xrange(1):
+for i in range(1):
 
       #print np.shape(npp[i])
       #gpp_mte_ori_mean.append(np.mean(npp[i],axis = 1))

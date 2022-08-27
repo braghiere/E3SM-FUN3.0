@@ -29,7 +29,7 @@ plt.rcParams["font.family"] = "sans-serif"  # # font
 
 
 #f = Dataset('files/time_average_h0.nc','r')
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]
@@ -127,7 +127,7 @@ mdata = maskoceans(x2, y2, data2,resolution='l',grid=1.25,inlands=True)
 
 #My colorbar
 
-upper = plt.cm.jet(np.arange(256))
+upper = plt.cm.viridis(np.arange(256))
 
 lower = np.ones((int(256/4),4))
 
@@ -140,6 +140,7 @@ cmap = ListedColormap(cmap, name='myColorMap', N=cmap.shape[0])
 
 
 max_val = np.max(v)
+max_val = 15.
 print(max_val)
 #sys.exit()
 
@@ -154,8 +155,8 @@ for i in xrange(1):
  
    m.drawcoastlines(color='0.0', linewidth=4.5)
    #m.drawcountries(color='0.', linewidth=4.5)
-   m.drawparallels(np.arange(-90.,91.,30.), labels=[1,0,0,1],    dashes=[1,1], linewidth=1.0, color='0.5',fontsize='x-large')
-   m.drawmeridians(np.arange(0., 360., 60.), labels=[1,0,0,1], dashes=[1,1], linewidth=1.0, color='0.5',fontsize='x-large')
+   m.drawparallels(np.arange(-90.,91.,30.), labels=[1,0,0,1],    dashes=[1,1], linewidth=1.0, color='0.5',fontsize='xx-large')
+   m.drawmeridians(np.arange(0., 360., 60.), labels=[1,0,0,1], dashes=[1,1], linewidth=1.0, color='0.5',fontsize='xx-large')
 
 
    #mdata[mdata==np.nan]=10e-20
@@ -179,7 +180,7 @@ for i in xrange(1):
    cbar.ax.get_xaxis().labelpad = 45
    #cbar.ax.set_ylabel('EM (%)', rotation=270)
    #cbar.ax.set_xlabel('g P m$^{-2}$ yr$^{-1}$', rotation=0,color='black', size=78, fontname='Times')
-   cbar.ax.set_xlabel('%', rotation=0,color='black', size=78)
+   cbar.ax.set_xlabel('C use ratio (%)', rotation=0,color='black', size=78*1.5)
    #cbar.ax.set_xlabel('ECM tree basal area (%)', rotation=0,color='black', size=78)
    #no coloredge
    #cbar.solids.set_edgecolor("face")
@@ -187,8 +188,8 @@ for i in xrange(1):
    cbar.solids.set_linewidth(6)
    #cbar.set_clim(0.0,100)
    cbar.set_clim(vmin,vmax)
-   #plt.title(r'Retranslocation', fontname='Times', fontsize=92,pad=26)
-   cbar.ax.tick_params(labelsize='xx-large')
+   plt.title(r'Nitrogen', fontname='Times', fontsize=92*1.5,pad=26)
+   cbar.ax.tick_params(labelsize=92)
    #plt.savefig('em_steindinger_tot.pdf',bbox_inches="tight",dpi=300)
    plt.savefig('figures/Nitrogen/NUPTAKE_NPP_ratio.png',bbox_inches="tight")
    #plt.savefig('ecm_orig_shi_1p9x2p5.png',bbox_inches="tight",dpi=300)

@@ -84,7 +84,7 @@ pftname_fig = [ "not \n vegetated",
 
 
 #f = Dataset('files/time_average_elm_pft.nc','r')
-f = Dataset('files/fix_global_v7_funp_pft_year.nc','r')
+f = Dataset('files/fix_global_v6_funp_pft_year.nc','r')
 f1 = Dataset('../fix_global_v3_1994_2005/files/fix_global_v3_pft_mean.nc','r')
 
 lat = f.variables['lat'][:]
@@ -132,7 +132,7 @@ pretrans_ori[pretrans_ori == 1]=np.nan
 pretrans_ori[pretrans_ori == 0]=np.nan
 
 
-#for i in xrange(16):
+#for i in range(16):
 #   plt.imshow(pnonmyc_ori[i,:,:])
 #   plt.show()
 #sys.exit()
@@ -160,7 +160,7 @@ npp_pactive_tot = []
 npp_pnonmyc_tot = [] 
 npp_pretrans_tot = [] 
 
-for i in xrange(len(pft)):
+for i in range(len(pft)):
 
    print('pft=',pft[i])
    #PACTIVE
@@ -264,7 +264,7 @@ pretrans[pretrans==0]=np.nan
 pretrans[pretrans==1]=np.nan
 pretrans=np.ma.masked_array(pretrans,np.isnan(pretrans))
 
-#for i in xrange(16):
+#for i in range(16):
 #   plt.imshow(pactive[i,:,:])
 #   plt.show()
 #sys.exit()
@@ -347,7 +347,7 @@ plt.savefig('figures/24_npp_pft_all.png')
 plt.close()
 #sys.exit()
 
-for i in xrange(len(pft)):
+for i in range(len(pft)):
 
  #PNONMYC
  pnonmyc_arr.append(np.mean(np.ma.average(pnonmyc[i,:,:], \

@@ -29,7 +29,7 @@ plt.rcParams["font.family"] = "sans-serif"  # # font
 
 
 #f = Dataset('files/time_average_h0.nc','r')
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
 f1 = Dataset('../fix_global_v3_1994_2005/files/fix_global_v3_time_avg.nc','r')
 
 lat = f.variables['lat'][:]
@@ -130,7 +130,7 @@ levels=[-1.*max_val,-0.8*max_val,-0.6*max_val,-0.4*max_val,-.2*max_val,-.1*max_v
 
 print(levels)
 
-for i in xrange(1):
+for i in range(1):
    fig = plt.figure(figsize=(48, 48)) 
    m.drawmapboundary(fill_color='white', zorder=-1, linewidth=4.5)
    m.fillcontinents(color='0.8', lake_color='white', zorder=0)
@@ -277,7 +277,7 @@ levels=[-1.*max_val,-0.8*max_val,-0.6*max_val,-0.4*max_val,-.2*max_val,-.1*max_v
 
 print(levels)
 
-for i in xrange(1):
+for i in range(1):
    fig = plt.figure(figsize=(48, 48)) 
    m.drawmapboundary(fill_color='white', zorder=-1, linewidth=4.5)
    m.fillcontinents(color='0.8', lake_color='white', zorder=0)
@@ -350,8 +350,8 @@ count_n = 0
 count_p = 0
 count_np = 0
 
-for i in xrange(len(npp_diff[:,0])):
-  for j in xrange(len(npp_diff[0,:])):
+for i in range(len(npp_diff[:,0])):
+  for j in range(len(npp_diff[0,:])):
      if( abs(npp_diff_n[i,j]) >= abs(npp_diff_p[i,j]) + 0.01*abs(npp_diff_p[i,j]) ):
         npp_diff[i,j] = -1.*npp_diff_n[i,j]*multiplier[i,j]/np.cos(np.deg2rad(lat[i]))
         count_n = count_n + 1
@@ -424,7 +424,7 @@ levels=[-1.*max_val,-0.8*max_val,-0.6*max_val,-0.4*max_val,-.2*max_val,-.1*max_v
 
 print(levels)
 
-for i in xrange(1):
+for i in range(1):
    fig = plt.figure(figsize=(48, 48)) 
    m.drawmapboundary(fill_color='white', zorder=-1, linewidth=4.5)
    m.fillcontinents(color='0.8', lake_color='white', zorder=0)
@@ -438,8 +438,8 @@ for i in xrange(1):
    #PLOT ABSOLUTE
    #cs = m.contourf(X2,Y2,mdata,levels,cmap=cmap,extend='both')
    #cs = m.contourf(X2,Y2,mdata,levels,cmap=cmap)
-   cs = m.contourf(X2,Y2,mdata,levels,cmap=plt.cm.bwr,extend='both')
-   #cs = m.contourf(X2,Y2,mdata,levels,cmap=plt.cm.coolwarm,extend='both')
+   #cs = m.contourf(X2,Y2,mdata,levels,cmap=plt.cm.bwr,extend='both')
+   cs = m.contourf(X2,Y2,mdata,levels,cmap=plt.cm.coolwarm,extend='both')
 
    #vmin,vmax = (-0.01251*max_val,max_val)
    vmin,vmax = (-1.*max_val,1.*max_val)
@@ -460,7 +460,7 @@ for i in xrange(1):
    #cbar.ax.get_yaxis().labelpad = 60
    cbar.ax.get_xaxis().labelpad = 45
    #cbar.ax.set_ylabel('EM (%)', rotation=270)
-   cbar.ax.set_xlabel(r'More P limited $\longleftarrow \longrightarrow$ More N limited', rotation=0,color='black', size=78, fontname='Times')
+   cbar.ax.set_xlabel(r'More P limited $\longleftarrow$                    NP co-limited                    $\longrightarrow$ More N limited', rotation=0,color='black', size=78, fontname='Times')
    #cbar.ax.set_xlabel('ECM tree basal area (%)', rotation=0,color='black', size=78)
    #no coloredge
    #cbar.solids.set_edgecolor("face")

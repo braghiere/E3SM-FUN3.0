@@ -40,7 +40,7 @@ def mean_confidence_interval(data, confidence=0.95):
 
 
 #f = Dataset('files/time_average_h0.nc','r')
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]
@@ -189,7 +189,7 @@ h_dn_corr, h_up_corr = stats.norm.interval(0.66, loc=mean_corr, scale= std_corr/
 print 'Global nfix =', mean_corr, '+-', mean_corr-h_dn_corr, 'PgCyr-1'
 
 
-#sys.exit()
+sys.exit()
 
 gpp_mte_ori_mean = []
 gpp_mte_ori_mean_puptake = []
@@ -234,10 +234,10 @@ for i, pft in enumerate(my_pfts):
 
 	plt.legend()
 	axes = plt.gca()
-	axes.set_xlim([-90.,90.])
+	axes.set_xlim([-60.,80.])
 	axes.set_ylim([0.0,100.0])
 
-        plt.xticks(np.arange(min((np.asarray(x)*res_lat) -90.), max((np.asarray(x)*res_lat) -90.) + 1., 30.))
+        #plt.xticks(np.arange(min((np.asarray(x)*res_lat) -90.), max((np.asarray(x)*res_lat) -90.) + 1., 30.))
 
 	plt.grid(True)
 

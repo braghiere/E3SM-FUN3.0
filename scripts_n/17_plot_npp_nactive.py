@@ -29,7 +29,7 @@ plt.rcParams["font.family"] = "sans-serif"  # # font
 
 
 #f = Dataset('files/time_average_h0.nc','r')
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]
@@ -82,7 +82,7 @@ mdata = maskoceans(x2, y2, data2,resolution='l',grid=1.25,inlands=True)
 
 #My colorbar
 
-upper = plt.cm.jet(np.arange(256))
+upper = plt.cm.viridis(np.arange(256))
 
 lower = np.ones((int(256/4),4))
 

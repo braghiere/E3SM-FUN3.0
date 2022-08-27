@@ -67,7 +67,7 @@ pftname = [ "not_vegetated                           ",
 
 #f = Dataset('time_average_elm_pft.nc','r')
 #f = Dataset('files/elm_pft_monthly_mean.nc','r')
-f = Dataset('files/fix_global_v7_funp_pft_mean.nc','r')
+f = Dataset('files/fix_global_v6_funp_pft_mean.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]

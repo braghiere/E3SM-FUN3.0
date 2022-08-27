@@ -40,7 +40,7 @@ def mean_confidence_interval(data, confidence=0.95):
 
 
 #f = Dataset('files/time_average_h0.nc','r')
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f = Dataset('/home/renato/ELM_FUNP/updated_color_scheme/files/fix_global_v6_funp_time_avg.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]
@@ -51,7 +51,8 @@ unit = puptake.units
 long_name = puptake.long_name
 
 #puptake = f.variables['NFIX'][:]
-nfix = f.variables['FFIX_TO_SMINN'][:]
+nfix = f.variables['FFIX_TO_SMINN'][:] + f.variables['NFIX'][:]
+
 pnonmyc = f.variables['NNONMYC'][:]
 pactive = f.variables['NACTIVE'][:]
 pretrans = f.variables['NRETRANS'][:]
@@ -204,7 +205,7 @@ h_dn_corr, h_up_corr = stats.norm.interval(0.66, loc=mean_corr, scale= std_corr/
 print 'Global nfix =', mean_corr, '+-', mean_corr-h_dn_corr, 'PgCyr-1'
 
 
-#sys.exit()
+sys.exit()
 
 gpp_mte_ori_mean = []
 gpp_mte_ori_mean_pnonmyc = []
@@ -221,7 +222,7 @@ for i in xrange(1):
       gpp_mte_ori_ci34_0.append(st.t.interval(0.341, np.nanmean(puptake,axis = 1).count()-1, loc=np.nanmean(puptake,axis = 1), scale=np.std(puptake,axis = 1))[0])
 
       gpp_mte_ori_ci34_1.append(st.t.interval(0.341, np.nanmean(puptake,axis = 1).count()-1, loc=np.nanmean(puptake,axis = 1), scale=np.std(puptake,axis = 1))[1])
-      gpp_mte_ori_mean.append(np.mean(puptake,axis = 1))
+      gpp_mte_ori_mean.append(np.mean(nfix,axis = 1))
       gpp_mte_ori_mean_pnonmyc.append(np.mean(pnonmyc,axis = 1))
       gpp_mte_ori_mean_pecm.append(np.mean(pecm,axis = 1))
       gpp_mte_ori_mean_pam.append(np.mean(pam,axis = 1))
@@ -248,10 +249,10 @@ for i, pft in enumerate(my_pfts):
 
 	plt.legend()
 	axes = plt.gca()
-	axes.set_xlim([-90.,90.])
+	axes.set_xlim([-60.,80.])
 	#axes.set_ylim([0.0,3500.0])
 
-        plt.xticks(np.arange(min((np.asarray(x)*res_lat) -90.), max((np.asarray(x)*res_lat) -90.) + 1., 30.))
+        #plt.xticks(np.arange(min((np.asarray(x)*res_lat) -90.), max((np.asarray(x)*res_lat) -90.) + 1., 30.))
 
 	plt.grid(True)
 

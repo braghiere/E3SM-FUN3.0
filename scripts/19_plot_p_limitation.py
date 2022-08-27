@@ -29,8 +29,8 @@ plt.rcParams["font.family"] = "sans-serif"  # # font
 
 
 #f = Dataset('files/time_average_h0.nc','r')
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
-f1 = Dataset('../fix_global_v3_1994_2005/files/fix_global_v3_time_avg.nc','r')
+f = Dataset('/home/renato/ELM_FUNP/updated_color_scheme/files/fix_global_v6_funp_time_avg.nc','r')
+f1 = Dataset('/home/renato/ELM_FUNP/fix_global_v3_1994_2005/files/fix_global_v3_time_avg.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]
@@ -121,8 +121,8 @@ mdata = maskoceans(x2, y2, data2,resolution='l',grid=1.25,inlands=True)
 
 #My colorbar
 
-upper = plt.cm.jet(np.arange(256))
-#upper = plt.cm.bwr(np.arange(256))
+#upper = plt.cm.jet(np.arange(256))
+upper = plt.cm.YlGnBu(np.arange(256))
 
 lower = np.ones((int(256/4),4))
 
@@ -142,7 +142,7 @@ levels=[-1.*max_val,-0.8*max_val,-0.6*max_val,-0.4*max_val,-.2*max_val,-.1*max_v
 
 print(levels)
 
-for i in xrange(1):
+for i in range(1):
    fig = plt.figure(figsize=(48, 48)) 
    m.drawmapboundary(fill_color='white', zorder=-1, linewidth=4.5)
    m.fillcontinents(color='0.8', lake_color='white', zorder=0)
@@ -189,7 +189,7 @@ for i in xrange(1):
    #plt.title(r'$\Delta$ Net Primary Productivity Normalized by Soil P', fontname='Times', fontsize=92,pad=26)
    cbar.ax.tick_params(labelsize='xx-large')
    #plt.savefig('em_steindinger_tot.pdf',bbox_inches="tight",dpi=300)
-   plt.savefig('figures/Plimitation.png',bbox_inches="tight")
+   plt.savefig('Plimitation.png',bbox_inches="tight")
    #plt.savefig('ecm_orig_shi_1p9x2p5.png',bbox_inches="tight",dpi=300)
    #plt.show()
 
@@ -199,8 +199,8 @@ for i in xrange(1):
 #sys.exit()
 ########################################Nitrogen############################
 
-f = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
-f1 = Dataset('../fix_global_v3_1994_2005/files/fix_global_v3_time_avg.nc','r')
+f = Dataset('/home/renato/ELM_FUNP/updated_color_scheme/files/fix_global_v6_funp_time_avg.nc','r')
+f1 = Dataset('/home/renato/ELM_FUNP/fix_global_v3_1994_2005/files/fix_global_v3_time_avg.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]
@@ -294,7 +294,7 @@ levels=[-1.*max_val,-0.8*max_val,-0.6*max_val,-0.4*max_val,-.2*max_val,-.1*max_v
 
 print(levels)
 
-for i in xrange(1):
+for i in range(1):
    fig = plt.figure(figsize=(48, 48)) 
    m.drawmapboundary(fill_color='white', zorder=-1, linewidth=4.5)
    m.fillcontinents(color='0.8', lake_color='white', zorder=0)
@@ -341,7 +341,7 @@ for i in xrange(1):
    #plt.title(r'$\Delta$ Net Primary Productivity Normalized by Soil P', fontname='Times', fontsize=92,pad=26)
    cbar.ax.tick_params(labelsize='xx-large')
    #plt.savefig('em_steindinger_tot.pdf',bbox_inches="tight",dpi=300)
-   plt.savefig('figures/Nlimitation.png',bbox_inches="tight")
+   plt.savefig('Nlimitation.png',bbox_inches="tight")
    #plt.savefig('ecm_orig_shi_1p9x2p5.png',bbox_inches="tight",dpi=300)
    #plt.show()
 
@@ -387,8 +387,8 @@ count_p = 0
 count_np = 0
 
 
-for i in xrange(len(limnp[:,0])):
-  for j in xrange(len(limnp[0,:])):
+for i in range(len(limnp[:,0])):
+  for j in range(len(limnp[0,:])):
      if(retransnp[i,j]>=(leafnp[i,j] + leafnp[i,j]*0.01)):
         limnp[i,j] = limnp[i,j]*np.cos(np.deg2rad(lat[i]))*multiplier[i,j]
         count_n = count_n + 1
@@ -417,29 +417,107 @@ npp_diff = limnp
 
 #print(np.max(abs(npp_diff)))
 
-npp_diff = npp_diff/np.max(abs(npp_diff))
+
+f = Dataset('/mnt/n_p_lim_0p5.nc','r')
+
+
+lat = f.variables['lat'][:]
+lon = f.variables['lon'][:]
+npp_diff = f.variables['Band1'][:]
+
+
+lon = f.variables['lon'][:]
+npp_diff,lon = shiftgrid(180., npp_diff, lon, start=False)
+
+x1,y1 = np.meshgrid(lon, lat) 
+
+
+#npp_diff = npp_diff/np.max(abs(npp_diff))
 
 npp_diff = np.ma.filled(npp_diff,0.0)
+
+
+
 
 #print(npp_diff)
 
 
-#x2 = np.linspace(x[0][0],x[0][-1],x.shape[1]*20)
-#y2 = np.linspace(y[0][0],y[-1][0],y.shape[0]*30)
+x4 = np.linspace(x1[0][0],x1[0][-1],x1.shape[1]*8)
+y4 = np.linspace(y1[0][0],y1[-1][0],y1.shape[0]*16)
 
-x2 = np.linspace(x[0][0],x[0][-1],x.shape[1]*40)
-y2 = np.linspace(y[0][0],y[-1][0],y.shape[0]*60)
+#x2 = np.linspace(x[0][0],x[0][-1],x.shape[1]*40)
+#y2 = np.linspace(y[0][0],y[-1][0],y.shape[0]*60)
 
-x2,y2 = np.meshgrid(x2,y2)
-X2,Y2 = m(x2, y2)
+x3,y3 = np.meshgrid(x4,y4)
+X3,Y3 = m(x3, y3)
 
 #order=0 for nearest-neighbor, order=1 for bilinear, order=3 cubic
-data2 = interp(npp_diff,x[0],y[:,0],x2,y2,order=1)
+data2 = interp(npp_diff,x1[0],y1[:,0],x3,y3,order=1)
+
+data3 = interp(limnp,x[0],y[:,0],x2,y2,order=1)
+
+print(np.shape(data2), np.shape(data3))
+
+#plt.imshow(data3-data2)
+#plt.show()
+
+#sys.exit()
 
 
 
-mdata = maskoceans(x2, y2, data2,resolution='l',grid=1.25,inlands=True)
+
+mdata = maskoceans(x3, y3, data2,resolution='l',grid=1.25,inlands=True)
+
+conc_matrix = np.ones(np.shape(data3))
+
+conc_matrix[(data3/data2) < 0.] = -1.
+
+agree = np.zeros(np.shape(data3))
+
+#print(x4,y4)
+#print(np.shape(x4),np.shape(y4))
+
+
+for i in range(len(data3[:,0])):
+  for j in range(len(data3[0,:])):
+     if(abs(data3[i,j])>=abs(data2[i,j]) and conc_matrix[i,j] == 1.):
+       agree[i,j] = abs(data2[i,j])/abs(data3[i,j])
+     if(abs(data3[i,j])<abs(data2[i,j]) and conc_matrix[i,j] == 1.):       
+       agree[i,j] = abs(data3[i,j])/abs(data2[i,j])
+     if(abs(data3[i,j])>=abs(data2[i,j]) and conc_matrix[i,j] == -1.):       
+       agree[i,j] = -1.*abs(data2[i,j])/abs(data3[i,j])
+     if(abs(data3[i,j])<abs(data2[i,j]) and conc_matrix[i,j] == -1.):       
+       agree[i,j] = -1*abs(data3[i,j])/abs(data2[i,j])
+     print('%2.4f done!, agree = %1.2f, data2 = %1.2f, data3 = %1.2f' % (float(100.*i/len(data3[:,0])),agree[i,j], data2[i,j], data3[i,j]))
+
+#plt.imshow(agree)
+#plt.show()
+#sys.exit()
+     
+mdata = maskoceans(x3, y3, agree,resolution='l',grid=1.25,inlands=True)
 #mdata = maskoceans(x, y, v)
+
+###################wwriting to netcdf file################
+
+import netCDF4 as nc
+
+fn = 'agreementmap_elm_du2020.nc'
+ds = nc.Dataset(fn, 'w', format='NETCDF4')
+
+lat = ds.createDimension('lat', len(y4))
+lon = ds.createDimension('lon', len(x4))
+
+lats = ds.createVariable('lat', 'f4', ('lat',))
+lons = ds.createVariable('lon', 'f4', ('lon',))
+value = ds.createVariable('agree_index', 'f4', ('lat', 'lon',))
+value.units = '-'
+
+lats[:] = y4
+lons[:] = x4
+
+value[:, :] = mdata
+
+ds.close()
 
 #My colorbar
 
@@ -457,6 +535,7 @@ cmap = ListedColormap(cmap, name='myColorMap', N=cmap.shape[0])
 
 
 max_val = np.max(abs(npp_diff)/1.)
+max_val = 1.0
 
 #levels=[-0.01251*max_val,0.,0.01251*max_val,0.0251*max_val,0.0625*max_val,.1*max_val,.2*max_val,.3*max_val,.4*max_val,.5*max_val,.6*max_val,.7*max_val,.75*max_val,.8*max_val,.9*max_val,1.*max_val]
 
@@ -464,21 +543,30 @@ levels=[-1.*max_val,-0.8*max_val,-0.6*max_val,-0.4*max_val,-.2*max_val,-.1*max_v
 
 print(levels)
 
-for i in xrange(1):
+for i in range(1):
    fig = plt.figure(figsize=(48, 48)) 
    m.drawmapboundary(fill_color='white', zorder=-1, linewidth=4.5)
    m.fillcontinents(color='0.8', lake_color='white', zorder=0)
  
    m.drawcoastlines(color='0.0', linewidth=4.5)
    #m.drawcountries(color='0.', linewidth=4.5)
-   m.drawparallels(np.arange(-90.,91.,30.), labels=[1,0,0,1],    dashes=[1,1], linewidth=1.0, color='0.5',fontsize='x-large', fontname='Times')
-   m.drawmeridians(np.arange(0., 360., 60.), labels=[1,0,0,1], dashes=[1,1], linewidth=1.0, color='0.5',fontsize='x-large', fontname='Times')
+   m.drawparallels(np.arange(-90.,91.,30.), labels=[1,0,0,1],    dashes=[1,1], linewidth=1.0, color='0.5',fontsize='xx-large', fontname='Times')
+   m.drawmeridians(np.arange(0., 360., 60.), labels=[1,0,0,1], dashes=[1,1], linewidth=1.0, color='0.5',fontsize='xx-large', fontname='Times')
 
  
    #PLOT ABSOLUTE
    #cs = m.contourf(X2,Y2,mdata,levels,cmap=cmap,extend='both')
    #cs = m.contourf(X2,Y2,mdata,levels,cmap=cmap)
-   cs = m.contourf(X2,Y2,mdata,levels,cmap=plt.cm.bwr,extend='both')
+   #cs = m.contourf(X2,Y2,mdata,levels,cmap=plt.cm.bwr,extend='both')
+
+
+   import matplotlib.colors as mcol
+   cm1 = mcol.LinearSegmentedColormap.from_list("MyCmapName",["royalblue","gainsboro","mediumpurple","gainsboro","crimson"])
+   norm=plt.Normalize(-0.5,0.5)
+
+   #cs = m.contourf(X2,Y2,mdata,levels,cmap=plt.cm.gist_stern,extend='both')
+   #cs = m.contourf(X2,Y2,mdata,levels,cmap=cm1,norm=norm,extend='both')
+   cs = m.contourf(X3,Y3,mdata,levels,cmap=plt.cm.BrBG,norm=norm,extend='both')
    #cs = m.contourf(X2,Y2,mdata,levels,cmap=plt.cm.jet,extend='both')
    #cs = m.contourf(X2,Y2,mdata,levels,cmap=plt.cm.coolwarm,extend='both')
 
@@ -501,7 +589,9 @@ for i in xrange(1):
    #cbar.ax.get_yaxis().labelpad = 60
    cbar.ax.get_xaxis().labelpad = 45
    #cbar.ax.set_ylabel('EM (%)', rotation=270)
-   cbar.ax.set_xlabel(r'More P limited $\longleftarrow \longrightarrow$ More N limited', rotation=0,color='black', size=78, fontname='Times')
+   #cbar.ax.set_xlabel(r'More P limited $\longleftarrow \longrightarrow$ More N limited', rotation=0,color='black', size=78, fontname='Times')
+   #cbar.ax.set_xlabel(r'More P limited $\longleftarrow$            NP co-limited            $\longrightarrow$ More N limited', rotation=0,color='black', size=78*1.5, fontname='Times')
+   cbar.ax.set_xlabel(r'Low agreement $\longleftarrow$            Medium agreement            $\longrightarrow$ High agreement', rotation=0,color='black', size=78*1.5, fontname='Times')
    #cbar.ax.set_xlabel('ECM tree basal area (%)', rotation=0,color='black', size=78)
    #no coloredge
    #cbar.solids.set_edgecolor("face")
@@ -510,12 +600,11 @@ for i in xrange(1):
    #cbar.set_clim(0.0,100)
    cbar.set_clim(vmin,vmax)
    #plt.title(r'$\Delta$ Net Primary Productivity Normalized by Soil P', fontname='Times', fontsize=92,pad=26)
-   cbar.ax.tick_params(labelsize='xx-large')
+   cbar.ax.tick_params(labelsize=92)
    #plt.savefig('em_steindinger_tot.pdf',bbox_inches="tight",dpi=300)
-   plt.savefig('figures/NPlimitation.png',bbox_inches="tight")
+   plt.savefig('diff_NPlimitation_du2020_v4.png',bbox_inches="tight")
    #plt.savefig('ecm_orig_shi_1p9x2p5.png',bbox_inches="tight",dpi=300)
    #plt.show()
-
 
    plt.close()
 

@@ -67,7 +67,7 @@ pftname = [ "not_vegetated                           ",
 
 #f = Dataset('time_average_elm_pft.nc','r')
 #f = Dataset('files/elm_pft_monthly_mean.nc','r')
-f = Dataset('files/fix_global_v7_funp_pft_mean.nc','r')
+f = Dataset('files/fix_global_v6_funp_pft_mean.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]
@@ -118,8 +118,8 @@ weights = (radius*radius*(lon_u - lon_l)*(np.sin(lat_u)-np.sin(lat_l)))
 time = ['JAN','FEB','MAR','APR','MAY','JUN', \
         'JUL','AUG','SEP','OCT','NOV','DEC']
 
-for j in xrange(len(time)):
- for i in xrange(len(pft)):
+for j in range(len(time)):
+ for i in range(len(pft)):
 
    print('time=',time[j],'pft=',pft[i])
    #PACTIVE
@@ -213,8 +213,8 @@ pnonmyc_arr_time= np.zeros((len(time),len(pft)))
 pactive_arr_time= np.zeros((len(time),len(pft)))
 pretrans_arr_time= np.zeros((len(time),len(pft)))
 
-for j in xrange(len(time)):
-  for i in xrange(len(pft)):
+for j in range(len(time)):
+  for i in range(len(pft)):
 
    #PNONMYC
    pnonmyc_arr_time[j,i] = (np.mean(np.ma.average(pnonmyc[j,i,:,:], \
@@ -282,7 +282,7 @@ pnonmyc_arr_glob = np.zeros((len(time),6))
 pactive_arr_glob = np.zeros((len(time),6))
 pretrans_arr_glob = np.zeros((len(time),6))
 
-for j in xrange(len(time)): 
+for j in range(len(time)): 
   pnonmyc_arr_glob[j] = [np.sum([pnonmyc_arr[j,6],pnonmyc_arr[j,7],pnonmyc_arr[j,8]]), \
                     np.sum([pnonmyc_arr[j,12],pnonmyc_arr[j,13],pnonmyc_arr[j,14], \
                                           pnonmyc_arr[j,15],pnonmyc_arr[j,16]]), \
@@ -334,11 +334,9 @@ for i, pft in enumerate(my_pfts):
         #From gCm-2s-1 to TgCyr-1
         const = 30*24*60*60
         #const = (365*24*60*60)*weights/(10**12)
-        plt.stackplot(time[:],np.array(pnonmyc_arr_glob[i][:])*(const),np.array(pactive_arr_glob[i][:])*(const),np.array(pretrans_arr_glob[i][:]/1.)*(const),edgecolor='k',linewidth=3.3,colors=['b','r','darkorange'],labels=['Direct root uptake','Mycorrhizal uptake','Retranslocation']) 
-        #plt.plot(np.floor(((np.asarray(x) + 1)*res_lat) -90.),np.array(gpp_mte_ori_mean[0][:])*(const),'k',linewidth=15, label = 'Shi et al. (2016)') 
-        #plt.plot(np.floor(((np.asarray(x) + 1)*res_lat) -90.),( gpp_mte_ori_ci34_1[0][:])*(const),'k--',linewidth=7, label = r'$\pm 1. \sigma$ ') 
-        #plt.plot(np.floor(((np.asarray(x) + 1)*res_lat) -90.),(gpp_mte_ori_ci34_0[0][:])*(const),'k--',linewidth=7)
-        #plt.fill_between(np.floor(((np.asarray(x) + 1)*res_lat)-90.), (gpp_mte_ori_ci34_0[0][:])*(const), (gpp_mte_ori_ci34_1[0][:])*(const) ,alpha=0.3, facecolor='k')
+        #plt.stackplot(time[:],np.array(pnonmyc_arr_glob[i][:])*(const),np.array(pactive_arr_glob[i][:])*(const),np.array(pretrans_arr_glob[i][:]/1.)*(const),edgecolor='k',linewidth=3.3,colors=['b','r','darkorange'],labels=['Direct root uptake','Mycorrhizal uptake','Retranslocation']) 
+        plt.stackplot(time[:],np.array(pnonmyc_arr_glob[i][:])*(const),np.array(pactive_arr_glob[i][:])*(const),np.array(pretrans_arr_glob[i][:]/1.)*(const),edgecolor='k',linewidth=3.3,colors=['#edf8b1','#7fcdbb','#2c7fb8'],labels=['Direct root uptake','Mycorrhizal uptake','Retranslocation'])        
+
 
 
         if(i==2):

@@ -1,6 +1,7 @@
 import sys
 import os
 import datetime
+import numpy as np
 
 begin = datetime.datetime.now()
 
@@ -70,16 +71,22 @@ print('Ploting Mycorrhizal uptake...')
 os.system('python scripts/16_plot_cost_pretrans.py')
 print('Done! Look for PACTIVE.png')
 
+print('Ploting Solution P...')
+os.system('python scripts/17_plot_*.py')
+print('Done! Look for SolutionP.png')
 
-os.system('python scripts/17_plot_SOLUTIONP.py')
+print('Ploting Mycorrhizal uptake...')
 os.system('python scripts/18_plot_NPP_diff_norm.py')
+print('Done! Look for PACTIVE.png')
+
+print('Ploting Mycorrhizal uptake...')
 os.system('python scripts/19_plot_p_limitation.py')
-os.system('python scripts/20_plot_npp_pactive.py')
-os.system('python scripts/21_plot_npp_pnonmyc.py')
-os.system('python scripts/22_plot_npp_pretrans.py')
-os.system('python scripts/23_plot_surfdata.py')
-os.system('python scripts/24_plot_npp_pft.py')
-os.system('python scripts/25_plot_auto_resp.py')
+print('Done! Look for PACTIVE.png')
+
+for i in [20,21,22,23,24,25]:
+   print('Ploting Solution P...')
+   os.system('python scripts/%s_plot_*.py' % (int(i)))
+   print('Done! Plotted figure %s' % (int(i)))
 
 print('This took this time to finish:')
 print(datetime.datetime.now() - begin)

@@ -57,7 +57,7 @@ pftname_fig_v1 = [ "broadleaf_deciduous",
 
 
 #f = Dataset('files/time_average_h0.nc','r')
-f1 = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f1 = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
 lat = f1.variables['lat'][:]
 lon = f1.variables['lon'][:]
 
@@ -112,7 +112,7 @@ x2,y2 = np.meshgrid(x2,y2)
 X2,Y2 = m(x2, y2)
 
 data2 = []
-for i in xrange(6):
+for i in range(6):
   print("Interpolating %s ..." % pftname_fig_v1[i])
   #order=0 for nearest-neighbor, order=1 for bilinear, order=3 cubic
   data2.append(interp(v[i,:,:],x[0],y[:,0],x2,y2,order=1))
@@ -122,14 +122,15 @@ data2 = np.array(data2)
 
 mdata = []
 
-for i in xrange(6):
+for i in range(6):
    print("Masking oceans of %s ..." % pftname_fig_v1[i])
    mdata.append(maskoceans(x2, y2, data2[i,:,:],resolution='l',grid=1.25,inlands=True))
 
 mdata = np.array(mdata)
 #My colorbar
 
-upper = plt.cm.jet(np.arange(256))
+#upper = plt.cm.jet(np.arange(256))
+upper = plt.cm.viridis(np.arange(256))
 
 lower = np.ones((int(256/4),4))
 
@@ -147,7 +148,7 @@ max_val = 100.
 levels=[-0.01251*max_val,0.,0.01251*max_val,0.0251*max_val,0.0625*max_val,.1*max_val,.2*max_val,.3*max_val,.4*max_val,.5*max_val,.6*max_val,.7*max_val,.75*max_val,.8*max_val,.9*max_val,1.*max_val]
 
 
-for i in xrange(6):
+for i in range(6):
    fig = plt.figure(figsize=(48, 48)) 
    m.drawmapboundary(fill_color='white', zorder=-1, linewidth=4.5)
    m.fillcontinents(color='0.8', lake_color='white', zorder=0)

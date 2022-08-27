@@ -40,7 +40,7 @@ def mean_confidence_interval(data, confidence=0.95):
 
 
 #f = Dataset('files/time_average_h0.nc','r')
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]
@@ -181,7 +181,7 @@ gpp_mte_ori_mean_pretrans = []
 gpp_mte_ori_ci34_0 = []
 gpp_mte_ori_ci34_1 = []
 
-for i in xrange(1):
+for i in range(1):
 
       #print np.shape(npp[i])
       #gpp_mte_ori_mean.append(np.mean(npp[i],axis = 1))
@@ -205,20 +205,18 @@ for i, pft in enumerate(my_pfts):
         
         #From gCm-2s-1 to TgCyr-1
         const = (365*24*60*60)*weights/(10**12)
-        plt.stackplot(np.floor(((np.asarray(x) + 1)*res_lat) -90.),np.array(gpp_mte_ori_mean_pnonmyc[0][:])*(const),np.array(gpp_mte_ori_mean_pam[0][:])*(const),np.array(gpp_mte_ori_mean_pecm[0][:])*(const),np.array(gpp_mte_ori_mean_pretrans[0][:])*(const),edgecolor='k',linewidth=3.3,colors=['chartreuse','b','r','yellow'],labels=['Direct root uptake','AM root uptake','ECM root uptake','Retranslocation']) 
-        #plt.plot(np.floor(((np.asarray(x) + 1)*res_lat) -90.),np.array(gpp_mte_ori_mean[0][:])*(const),'k',linewidth=15, label = 'Shi et al. (2016)') 
-        #plt.plot(np.floor(((np.asarray(x) + 1)*res_lat) -90.),( gpp_mte_ori_ci34_1[0][:])*(const),'k--',linewidth=7, label = r'$\pm 1. \sigma$ ') 
-        #plt.plot(np.floor(((np.asarray(x) + 1)*res_lat) -90.),(gpp_mte_ori_ci34_0[0][:])*(const),'k--',linewidth=7)
-        #plt.fill_between(np.floor(((np.asarray(x) + 1)*res_lat)-90.), (gpp_mte_ori_ci34_0[0][:])*(const), (gpp_mte_ori_ci34_1[0][:])*(const) ,alpha=0.3, facecolor='k')
+        #plt.stackplot(np.floor(((np.asarray(x) + 1)*res_lat) -90.),np.array(gpp_mte_ori_mean_pnonmyc[0][:])*(const),np.array(gpp_mte_ori_mean_pam[0][:])*(const),np.array(gpp_mte_ori_mean_pecm[0][:])*(const),np.array(gpp_mte_ori_mean_pretrans[0][:])*(const),edgecolor='k',linewidth=3.3,colors=['chartreuse','b','r','yellow'],labels=['Direct root uptake','AM root uptake','ECM root uptake','Retranslocation']) 
+        plt.stackplot(np.floor(((np.asarray(x) + 1)*res_lat) -90.),np.array(gpp_mte_ori_mean_pnonmyc[0][:])*(const),np.array(gpp_mte_ori_mean_pam[0][:])*(const),np.array(gpp_mte_ori_mean_pecm[0][:])*(const),np.array(gpp_mte_ori_mean_pretrans[0][:])*(const),edgecolor='k',linewidth=3.3,colors=['#ffffcc','#a1dab4','#41b6c4','#225ea8'],labels=['Direct root uptake','AM root uptake','ECM root uptake','Retranslocation']) 
 
 
 
 	plt.legend()
 	axes = plt.gca()
-	axes.set_xlim([-90.,90.])
+	#axes.set_xlim([-90.,90.])
+	axes.set_xlim([-60.,80.])
 	#axes.set_ylim([0.0,3500.0])
 
-        plt.xticks(np.arange(min((np.asarray(x)*res_lat) -90.), max((np.asarray(x)*res_lat) -90.) + 1., 30.))
+        #plt.xticks(np.arange(min((np.asarray(x)*res_lat) -90.), max((np.asarray(x)*res_lat) -90.) + 1., 30.))
 
 	plt.grid(True)
 

@@ -62,15 +62,6 @@ print('Ploting PUPTAKE_NPP_FRACTION ratio...')
 os.system('python scripts_n/14_plot_puptake_npp_ratio.py')
 print('Done! Look for PUPTAKE_NPP_ratio.png')
 
-
-os.system('python scripts_n/16_plot_SMINN.py')
-os.system('python scripts_n/17_plot_npp_nactive.py')
-os.system('python scripts_n/18_plot_npp_nnonmyc.py')
-os.system('python scripts_n/19_plot_npp_nretrans.py')
-os.system('python scripts_n/20_plot_npp_nfix.py')
-os.system('python scripts_n/21_plot_carbon_use_pft_b.py')
-os.system('python scripts_n/21_plot_carbon_use_pft.py')
-
 print('This took this time to finish:')
 print(datetime.datetime.now() - begin)
 print('Done!')

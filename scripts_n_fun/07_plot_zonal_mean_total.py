@@ -40,7 +40,7 @@ def mean_confidence_interval(data, confidence=0.95):
 
 
 #f = Dataset('files/time_average_h0.nc','r')
-f = Dataset('files/fix_global_v6_fun_time_avg.nc','r')
+f = Dataset('/home/renato/ELM_FUNP/updated_color_scheme/files/fix_global_v6_fun_time_avg.nc','r')
 
 lat = f.variables['lat'][:]
 lon = f.variables['lon'][:]
@@ -56,7 +56,7 @@ pactive = f.variables['NACTIVE'][:]
 pretrans = f.variables['NRETRANS'][:]
 pam = f.variables['NAM'][:]
 pecm = f.variables['NECM'][:]
-
+nfix = f.variables['FFIX_TO_SMINN'][:] + f.variables['NFIX'][:]
 
 puptake,lon = shiftgrid(180., puptake, lon, start=False)
 lon = f.variables['lon'][:]
@@ -168,6 +168,25 @@ std_corr = np.mean(np.sqrt(variance))*(365*24*60*60)*148847000*(1000*1000)/(10**
 h_dn_corr, h_up_corr = stats.norm.interval(0.66, loc=mean_corr, scale= std_corr/np.sqrt(len(np.ma.array(pretrans))))
 
 print 'Global pretrans =', mean_corr, '+-', mean_corr-h_dn_corr, 'PgCyr-1'
+
+#NFIX
+nfix = np.array(nfix)
+nfix[nfix==1e+36]=np.nan
+
+nfix=np.ma.masked_array(nfix,np.isnan(nfix))
+average=np.ma.average(nfix,axis=0,weights=weights)
+variance=np.ma.average((nfix-average)**2,axis=0,weights=weights)
+
+mean_corr = np.mean(np.ma.average(nfix,axis=0,weights=weights))*(365*24*60*60)*148847000*(1000*1000)/(10**15)
+
+std_corr = np.mean(np.sqrt(variance))*(365*24*60*60)*148847000*(1000*1000)/(10**15)
+
+h_dn_corr, h_up_corr = stats.norm.interval(0.66, loc=mean_corr, scale= std_corr/np.sqrt(len(np.ma.array(nfix))))
+
+print 'Global nfix =', mean_corr, '+-', mean_corr-h_dn_corr, 'PgCyr-1'
+
+
+sys.exit()
 
 
 

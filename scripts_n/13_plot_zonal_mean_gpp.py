@@ -42,10 +42,10 @@ def mean_confidence_interval(data, confidence=0.95):
 #f = Dataset('files/time_average_h0.nc','r')
 #f1 = Dataset('files/E3SM_latest_time_average_1994_2005.nc','r')
 
-f = Dataset('files/fix_global_v7_funp_time_avg.nc','r')
+f = Dataset('files/fix_global_v6_funp_time_avg.nc','r')
 f1 = Dataset('../fix_global_v3_1994_2005/files/fix_global_v3_time_avg.nc','r')
 #f2 = Dataset('../fix_global_v3_1994_2005/files/fix_global_v3_fun_time_avg.nc','r')
-f2 = Dataset('files/fix_global_v7_fun_time_avg.nc','r')
+f2 = Dataset('files/fix_global_v6_fun_time_avg.nc','r')
 
 fluxcom = Dataset('/home/renato/ELM_FUNP/fluxcom_gpp/out_mean.nc','r')
 
