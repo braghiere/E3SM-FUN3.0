@@ -1,0 +1,69 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below."
+type: dataset
+title: "ELM-FUN3.0 model output: global carbon costs of plant nitrogen and phosphorus acquisition (1994-2005)"
+doi: 10.5281/zenodo.20452251
+date-released: "2022-08-13"
+url: "https://doi.org/10.5281/zenodo.20452251"
+license: CC-BY-NC-4.0
+version: "3.0"
+repository-code: "https://github.com/braghiere/E3SM-FUN3.0"
+authors:
+  - family-names: Braghiere
+    given-names: Renato K.
+    orcid: "https://orcid.org/0000-0002-7722-717X"
+  - family-names: Fisher
+    given-names: Joshua B.
+    orcid: "https://orcid.org/0000-0003-4734-9085"
+  - family-names: Allen
+    given-names: Kara
+    orcid: "https://orcid.org/0000-0001-6082-6486"
+  - family-names: Brzostek
+    given-names: Edward
+    orcid: "https://orcid.org/0000-0002-2964-0576"
+  - family-names: Shi
+    given-names: Mingjie
+    orcid: "https://orcid.org/0000-0002-2469-4831"
+  - family-names: Yang
+    given-names: Xiaojuan
+    orcid: "https://orcid.org/0000-0002-2686-745X"
+  - family-names: Ricciuto
+    given-names: Daniel
+    orcid: "https://orcid.org/0000-0002-3668-3021"
+  - family-names: Fisher
+    given-names: Rosie A.
+    orcid: "https://orcid.org/0000-0003-3260-9227"
+  - family-names: Zhu
+    given-names: Qing
+    orcid: "https://orcid.org/0000-0003-2441-944X"
+  - family-names: Phillips
+    given-names: Richard P.
+    orcid: "https://orcid.org/0000-0002-1345-4138"
+references:
+  - type: article
+    title: "Modeling global carbon costs of plant nitrogen and phosphorus acquisition"
+    authors:
+      - family-names: Braghiere
+        given-names: Renato K.
+      - family-names: Fisher
+        given-names: Joshua B.
+      - family-names: Allen
+        given-names: Kara
+      - family-names: Brzostek
+        given-names: Edward
+      - family-names: Shi
+        given-names: Mingjie
+      - family-names: Yang
+        given-names: Xiaojuan
+      - family-names: Ricciuto
+        given-names: Daniel
+      - family-names: Fisher
+        given-names: Rosie A.
+      - family-names: Zhu
+        given-names: Qing
+      - family-names: Phillips
+        given-names: Richard P.
+    journal: "Journal of Advances in Modeling Earth Systems"
+    year: 2022
+    volume: 14
+    doi: 10.1029/2022MS003204
